@@ -1,0 +1,57 @@
+# i3blocks configuration file
+#
+# The i3blocks man page describes the usage of the binary,
+# and its website describes the configuration:
+#
+#     https://vivien.github.io/i3blocks
+
+
+# Global properties
+separator=true
+separator_block_width=15
+
+#[documentation]
+#full_text=Documentation
+#website=https://vivien.github.io/i3blocks
+#command=xdg-open "$website"
+#color=#f12711
+
+[weather]
+command=curl -s wttr.in/?format=3
+interval=1800
+color=#00aaff
+
+
+
+[processes]
+command=ps -e | wc -l
+interval=10
+color=#8B7355
+
+
+[disk]
+command=df -h / | awk 'NR==2 {print "", $4 }'
+interval=30
+color=#FAF0E6
+
+[mem]
+command=free -h | awk '/^Mem:/ {print "", $3, "/", $2}'
+interval=10
+color=#8B7355
+
+
+
+[temp]
+command=cat /sys/class/thermal/thermal_zone0/temp | awk '{print "", $1/1000, "°C"}'
+interval=10
+color=#ff4500
+
+[volume]
+command=amixer get Master | awk -F'[][]' 'END{ print " " $2 }'
+interval=1
+color=#ffffff
+
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
